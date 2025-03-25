@@ -93,11 +93,10 @@ function getPowerFunction(exponent) {
  */
 function getPolynom(...args) {
   if (args.length !== 0) {
-    return function (x) {
-      return args.reduce((acc, num, index) => {
+    return (x) =>
+      args.reduce((acc, num, index) => {
         return acc + num * x ** (args.length - 1 - index);
       }, 0);
-    };
   }
   return null;
 }
@@ -119,7 +118,7 @@ function getPolynom(...args) {
 function memoize(func) {
   let res;
   let isCalled = false;
-  return function () {
+  return () => {
     if (!isCalled) {
       res = func();
       isCalled = true;
@@ -171,7 +170,7 @@ function retry(/* func, attempts */) {
  *
  */
 function logger(func, logFunc) {
-  return function (...args) {
+  return (...args) => {
     const str = args.map((arg) => JSON.stringify(arg)).join(',');
     logFunc(`${func.name}(${str}) starts`);
     const res = func(...args);
